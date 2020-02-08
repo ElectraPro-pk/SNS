@@ -1,0 +1,5 @@
+{
+  "uploads": "public/SNS/UPLOADS/",
+  "posts": "public/SNS/POSTS/",
+  "profile": "public/SNS/profile.ttl"
+  }

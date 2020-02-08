@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SNS CHAT</title>
+  <link rel="stylesheet" href="chatS/style.css">
+  <link rel="stylesheet" href="chatS/w3.css">
+  <link rel="stylesheet" href="chatS/chatF.css">
+  <link href="taskbar/scheme.css" rel="stylesheet">
+  <script src="scripts/AUTH.js"></script>
+  <script src="scripts/solid-file-client.js"></script>
+  <script src="scripts/solid-query-ldflex.bundle.js"></script>
+  <script src="scripts/jquery.js"></script>
+  <script src="scripts/control.js"></script>
+  <script src="chatS/peer.js"></script>
+  <script src="scripts/Chat.js"></script>
+  <style>
+    .navbar{
+      transform: translateY(-425%);
+    }
+    #webd{
+      visibility: collapse;
+    }
+  </style>
+  <script>
+    solid.auth.trackSession(session => {
+      if(!session)
+        window.location.href="../index.html";
+    });
+    
+
+   
+  </script>
+<style> 
+
+</style>
+</head>
+<body onload="loadAll()">
+
+  <nav class="w3-container navbar">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img id="logo" src="images/sns1.png">
+        <input class="w3-input" placeholder= "friend's username or web ID"id="search" onchange="" type="text">
+        <img class="cont" id="nf" src="ICONS/newsfeed.png">
+        <img class="cont" id="ch" src="ICONS/chat.png">
+        <img class="cont" id="fl" src="ICONS/friends.png">
+        <img class="cont" id="pr" src="ICONS/contact.png">
+        <img class="cont" id="st" src="ICONS/setting.png">
+        <img class="cont" id="hp" src="ICONS/help.png">
+        <img class="cont" id="lo" src="ICONS/logout.png">
+    
+</nav>
+
+<br><br><br><br>
+<div class="sidenav" id="friends">
+  <br><br>
+  <a style="color:rgb(0,130,150);" href="#"><h2>Friends</h2>
+    <img id="spinner" src="../loader.gif">
+    <hr></a>
+  
+</div>
+
+<p id="webd"></p>
+
+
+<script>
+  solid.auth.trackSession(session => {
+    if(session){
+     $('#webd').text(session.webId);
+
+    }
+  },err => console.log(err));
+</script>
+
+<section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i><span id="friendUN">SNS CHAT</span>
+      </div>
+      <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div>
+    </header>
+  
+    <main class="msger-chat">
+    </main>
+  
+    <div class="msger-inputarea">
+      <input type="text" id="inS" class="msger-input" placeholder="Enter your message...">
+      <button class="msger-send-btn" onclick="sendMsg()">Send</button>
+    </div>
+  </section>
+</body>
+
+<script>
+  const cont = get('.msger-chat');
+  me = document.getElementById('webd').innerHTML;
+   const peer = new Peer(getname(me));
+   friend = "";
+   console.log(friend);
+  peer.on('connection', (conn) => {
+ conn.on('data', (data) => {
+    console.log(data);
+   const msgHTML = `
+   <div class="msg left-msg">
+     <div class="msg-img" style="background: blue"></div>
+
+     <div class="msg-bubble">
+       <div class="msg-info">
+         <div class="msg-info-name">${friend}</div>
+         <div class="msg-info-time">${formatDate(new Date())}</div>
+       </div>
+
+       <div class="msg-text">${data}</div>
+     </div>
+   </div>
+ `;
+ console.log(msgHTML);
+ if(cont.innerHTML){
+   cont.insertAdjacentHTML("beforeend",msgHTML);
+ }
+ else{
+   cont.innerHTML = msgHTML;
+ } 
+ cont.scrollTop += 500;
+ })
+});
+
+function formatDate(date) {
+ const h = "0" + date.getHours();
+ const m = "0" + date.getMinutes();
+
+ return `${h.slice(-2)}:${m.slice(-2)}`;
+}
+function get(selector, root = document) {
+ return root.querySelector(selector);
+}
+
+
+
+function sendMsg(){
+const message  = document.getElementById('inS').value ;
+ if(message){
+  const conn = peer.connect(friend);
+  console.log(conn)
+ document.getElementById('inS').value = "";
+   conn.on('open', () => {
+   conn.send(message);
+   const msgHTML = `
+   <div class="msg right-msg">
+     <div class="msg-img" style="background: black"></div>
+
+     <div class="msg-bubble">
+       <div class="msg-info">
+         <div class="msg-info-name">${peer.id}</div>
+         <div class="msg-info-time">${formatDate(new Date())}</div>
+       </div>
+
+       <div class="msg-text">${message}</div>
+     </div>
+   </div>
+ `;
+console.log(msgHTML);  
+if(cont.innerHTML){
+   cont.insertAdjacentHTML("beforeend",msgHTML);
+   
+ }
+ else{
+   cont.innerHTML = msgHTML;
+ } 
+ cont.scrollTop += 500;
+ });
+ }
+ else{
+   document.getElementById('inS').focus();
+ }
+}
+</script>
+</html>
