@@ -1,4 +1,5 @@
-<h1> <a href=''>SNS</a><br>Social Network Using <a href='https://solid.inrupt.com'>SOLID</a></h1>
+<h1> <a href='https://bscs16sdp20.wixsite.com/snss
+'>SNS</a><br>Social Network Using <a href='https://solid.inrupt.com'>SOLID</a></h1>
 <h2>Community, Collaboration , Chat and Comment</h2>
 <h2>TEAM OF <a href="https://fui.edu.pk/FURC">FURC</a></h2>
 <p>SNS (Social Network Using SOLID) caters all privacy related issues faced by
