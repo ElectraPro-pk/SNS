@@ -1,0 +1,173 @@
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/ico" href="images/sns2.png" />
+    <title >SNS</title>
+    <link href="w3.css" rel="stylesheet">
+    <link href="taskbar/taskbars.css" rel="stylesheet">
+    <link href="aclModal/slider.css" rel="stylesheet">
+    <link href="aclModal/main.css" rel="stylesheet">
+    <script src="scripts/AUTH.js"></script>
+    <script src="scripts/solid-file-client.js"></script>
+    <script src="scripts/solid-query-ldflex.bundle.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script src="acl/solid-acl-parser.bundle.js"></script>
+   
+    <script src="scripts/app.js"></script>
+    <script src="scripts/control.js"></script>
+    
+    <style>
+
+        #loader img{
+            width:50px;
+            height: 50px;
+        }
+        .myProf{
+            border-radius: 50%;
+        }
+        #loader{
+            visibility: hidden;
+        }
+        .buttons{
+          display: inline-flex;
+}
+#id01{
+    display: none;
+}
+.icon{
+  width:15px;
+  height: 15px;
+}
+.btns{
+  transition: all 0.09s ease-in-out;
+}
+.btns:hover{
+ transform: scale(1.12);
+}
+    </style>
+    <script>
+        solid.auth.trackSession(session => {if(!session)window.location.href="../index.html";});
+    </script>
+    <script>
+    </script>
+</head>
+
+<body  onload="getWebD()" oncontextmenu="return false;">
+    <p id="webd">ABS</p>
+        <nav class="w3-container navbar">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <img id="logo" src="images/sns1.png">
+      <input class="w3-input" placeholder= "friend's username or web ID"id="search" onchange="" type="text">
+      <img class="cont" id="nf" src="ICONS/newsfeed.png">
+      <img class="cont" id="ch" src="ICONS/chat.png">
+      <img class="cont" id="fl" src="ICONS/friends.png">
+      <img class="cont" id="pr" src="ICONS/contact.png">
+      <img class="cont" id="st" src="ICONS/setting.png">
+      <img class="cont" id="hp" src="ICONS/help.png">
+      <img class="cont" id="lo" src="ICONS/logout.png">
+    
+  </nav>
+        <div class="posts">
+        <div class="createPost">
+            <img src="../loader.gif" class="myProf"><span id="myPr">ABC</span>
+            <hr>
+            <textarea class="status" id="postbox" placeholder="What's on your mind?"></textarea>
+            
+            <p class="mediaFiles">
+                Attach Files <br><input type="file"  id="files">
+            </p>
+            <span id="loader"><img src="../loader.gif">Uploading your Post</span>
+            <button id="buttonpost" onclick="createPost()" class="w3-btn w3-blue w3-round">Share</button><br>
+            <br>
+            <hr>
+        </div>
+            <h2>News Feeds</h2>
+            <hr>
+        <div class="posts1">   
+        </div>
+
+        <div id="id01" class="w3-modal">
+         <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+          <header class="w3-container w3-blue"> 
+           <span onclick="document.getElementById('id01').style.display='none'" 
+           class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
+           <h2 id="head">Resource Permissions</h2>
+            <h6 id="furl"></h6>
+          </header>
+        
+          <div class="w3-bar w3-border-bottom">
+           <button class="tablink w3-bar-item w3-button" onclick="opentab(event, 'me')">Onwer</button>
+           <button class="tablink w3-bar-item w3-button" onclick="opentab(event, 'OA')">Other Agents</button>
+           <button class="tablink w3-bar-item w3-button" onclick="opentab(event, 'sh')">Share</button>
+          </div>
+          <div id="me" class="w3-container tab">
+            <h1>Owner</h1>
+            <h6 id="O"></h6>
+            <table class="perms">
+              <tr>
+                <td>READ</td>
+                <td id="rd"></td>
+              </tr>
+              <tr>
+                <td>WRITE</td>
+                <td id="wr"></td>
+              </tr>
+              <tr>
+                <td>CONTROL</td>
+                <td id="cnt"></td>
+              </tr>
+            </table>  
+          </div>
+          <div id="OA" class="w3-container tab">
+            <h1>Other Agents</h1>
+            <table class="perms">
+              <tr>
+                <td>READ</td>
+                <td id="prd"></td>
+              </tr>
+              <tr>
+                <td>WRITE</td>
+                <td id="pwr"></td>
+              </tr>
+              <tr>
+                <td>CONTROL</td>
+                <td id="pcnt"></td>
+              </tr>
+            </table>  
+          </div>
+          
+          <div id="sh" class="w3-container tab">
+            <h1>Sharing</h1>
+          </div> 
+          <div class="w3-container w3-light-grey w3-padding">
+           <button class="w3-button w3-right w3-blue w3-border" 
+           onclick="document.getElementById('id01').style.display='none'">Close</button>
+          </div>
+         </div>
+        </div>
+        </div>
+      <script>
+        document.getElementsByClassName("tablink")[0].click();
+        function opentab(evt, tabName) {
+          var i, x, tablinks;
+          x = document.getElementsByClassName("tab");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < x.length; i++) {
+            tablinks[i].classList.remove("w3-light-grey");
+          }
+          document.getElementById(tabName).style.display = "block";
+           evt.currentTarget.classList.add("w3-light-grey");
+        }
+        </script>
+      
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SNS</title>
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="icon" type="image/ico" href="sns2.png" />
+  <style>
+    button{
+      /*background:rgba(124, 77, 255,0.8);*/
+      background: rgba(0,130,150,0.95);
+      color:white;
+      font-size:18px;
+      border:none;
+      border-radius:5px;
+      padding:8px;
+      transition: all 0.1s ease-in-out;
+    }
+    button:hover{
+      background: rgba(0,130,150,0.4);
+      color: rgba(0,130,150,1);
+    }
+    *{
+      user-select: none;
+      outline:none;
+    }
+    .m{
+      top:0;
+      left:0;
+      transform: translate(40%,30%);
+          }
+    body{
+     background: rgba(0,130,150,0.2);
+    }
+    #loader{
+      width:200px;
+      height: 70px;
+      display: none;
+    }
+    img{
+      width:auto;
+      height:200px;
+    }
+    #fileInput{
+      position: absolute;
+      top:-300px;
+    }   
+  #pulse{
+    height:auto;
+    width: 200px;
+    animation: pulse infinite 0.5s ease-in-out;
+
+  }
+  @keyframes pulse{
+    0%{
+      transform: scale(0.95);
+    }
+    50%{
+      transform: scale(0.959);
+    }
+    100%{
+      transform: scale(0.95);
+    } 
+  }
+    </style>
+</head>
+<body class="w3-container w3-padding">
+  <div class="w3-container m">
+     <img id="pulse" src="sns2.png">
+      <h1 style="color:rgba(0,130,150,1);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SNS</h1>
+      <p id="login">
+        
+       You are not logged in.</h2>
+        <button>Log in</button>
+      </p>
+      <img src="loader.gif" id="loader">
+      <p>Do not have any POD signup <a href="https://solid.community/register" target="_blank">here</a></p>
+  </div>
+  <script src="scripts/solid-auth-client.bundle.js"></script>
+  <script src="scripts/solid-file-client.js"></script>
+  <script src="scripts/solid-query-ldflex.bundle.js"></script>
+  <script src="scripts/jquery.js"></script>
+  <script src ="scripts/solid-acl-parser.bundle.js"></script>
+  <script src="scripts/acl.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/ico" href="images/sns2.png" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title >Friend List Manager</title>
+    <link href="w3.css" rel="stylesheet">
+    <link href="flmS/modal.css" rel="stylesheet">
+    <link href="taskbar/scheme.css" rel="stylesheet">
+    <script src="scripts/AUTH.js"></script>
+    <script src="scripts/solid-file-client.js"></script>
+    <script src="scripts/solid-query-ldflex.bundle.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/control.js"></script>
+    <script src="scripts/flm.js"></script>
+    
+    <style>
+        
+        #webd{
+            display: none;
+        }
+        body{
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+        background: rgba(0,130,150,0.2);
+        }
+        .searchOptions{
+            width:100%;
+            display: inline-flex;
+            color:#142170;
+
+        }
+        .upper{
+            height: 70px;
+            background: #142170;
+            color:white;
+
+        }
+        
+        table tr td button{
+            border:2px solid orange;
+            color:orange;
+            background: #ffffff;
+            padding:5px;
+            transition: all 0.1s ease-in-out;
+        }
+        table tr td button:hover{
+            color:white;
+            background: orange;
+            border:2px solid #ffffff;
+            padding:6px;
+        }
+    </style>
+</head>
+<body onload="loadAll()">
+    <p id="webd"></p>
+    <script>
+        solid.auth.trackSession(session => {if(!session)window.location.href="../index.html";});
+       solid.auth.trackSession(session => {
+        $('#webd').text(session.webId);
+    });
+    </script>
+    <nav class="w3-container navbar">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img id="logo" src="images/sns1.png">
+            <input class="w3-input" placeholder= "friend's username or web ID"id="search" onchange="" type="text">
+            <img class="cont" id="nf" src="ICONS/newsfeed.png">
+            <img class="cont" id="ch" src="ICONS/chat.png">
+            <img class="cont" id="fl" src="ICONS/friends.png">
+            <img class="cont" id="pr" src="ICONS/contact.png">
+            <img class="cont" id="st" src="ICONS/setting.png">
+            <img class="cont" id="hp" src="ICONS/help.png">
+            <img class="cont" id="lo" src="ICONS/logout.png">
+    </nav>
+    <br><br>
+    <br><br>
+    <br><br>
+    <div class="w3-container">
+        <span>You have following friends in your list</span>
+        <br>
+<button style="float:right" onclick="window.location.href='categ.html'" class="w3-btn w3-blue">Categorized</button> 
+<br><br>
+        <table  class="w3-table w3-table-all" id="friends">
+        <tr ><th style="text-align: center" > Profile</th><th style="text-align: center" colspan="2">Action</th></tr>
+        </table>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2 >Change Category</h2>
+          </div>
+          <div class="modal-body">
+            <h3> Please Select the Category for This Friend </h3>
+             <button class="catBtn"   onclick="cat('Close')">Close</button> <br/>
+             <button class="catBtn"   onclick="cat('Restricted')">Restricted</button>  <br/>
+              <button class="catBtn"  onclick="cat('Family')">Family</button> <br/>
+               <button class="catBtn" onclick="cat('Work')" >Work</button> <br/>
+          </div>
+          <div class="modal-footer">
+            <h5 id="header"></h5>
+          </div>
+        </div>
+      
+      </div>
+      
+      
+      
+</body>
+
+</html>

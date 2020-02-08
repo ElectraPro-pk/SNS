@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title >SNS Feedback</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="../taskbar/scheme.css" rel="stylesheet">
+    <script src="../scripts/AUTH.js"></script>
+    <script src="../scripts/solid-file-client.js"></script>
+    <script src="../scripts/solid-query-ldflex.bundle.js"></script>
+    <script src="jquery.js"></script>
+    <style>
+        body{
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+            background:rgba(128,128,128,0.1);
+        }
+        #lg{
+            width:40px;
+            height:40px;
+            transform: translateY(-10%);
+            animation: 9s rotate infinite linear;
+            overflow: hidden;
+        }
+        @keyframes rotate{
+            from{
+                transform: rotateZ(0deg);
+            }
+            to{
+                transform: rotateZ(359deg);
+            }
+        }
+        .searchOptions{
+            width:100%;
+            display: inline-flex;
+            color:#142170;
+
+        }
+        .upper{
+            height: 70px;
+            background: #142170;
+            color:white;
+
+        }
+        input{
+            background: transparent;
+            color:#142170;
+        }
+        .frm label{
+            color:#142170;   
+            font-size:15px;
+        }
+        #C{
+            resize: none;
+            width: 100%;
+            height: 100px;
+            background: transparent;
+            border-color:#CCCCCC;
+            border-radius: 5px;
+        }
+        *{
+            user-select: none;
+            outline: none;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <nav class="w3-container navbar">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img id="logo" src="../images/sns1.png">
+            <input class="w3-input" placeholder= "friend's username or web ID"id="search" onchange="" type="text">
+            <img class="cont" id="nf" src="../ICONS/newsfeed.png">
+            <img class="cont" id="ch" src="../ICONS/chat.png">
+            <img class="cont" id="fl" src="../ICONS/friends.png">
+            <img class="cont" id="pr" src="../ICONS/contact.png">
+            <img class="cont" id="st" src="../ICONS/setting.png">
+            <img class="cont" id="hp" src="../ICONS/help.png">
+            <img class="cont" id="lo" src="../ICONS/logout.png">
+        
+    </nav>
+    <br><br><br><br><br>
+    <form class="frm w3-container w3-round">
+        <h2>Write to us!</h2>
+         <label for="em">Email</label>
+         <input class="w3-input" name="em" type="email" required>   
+         <label for="nm">Name</label>   
+         <input class="w3-input" type="text" name="nm" required>   
+         <label for="m">Message</label>   
+         <input class="w3-input" type="text" name="m" required>   
+         <label for="cm">Comments</label>   
+         <textarea name="cm" id="C"></textarea>
+    </form>
+    <center>
+        <button class="w3-btn w3-blue" id="send">Send</button>
+        
+         <button class="w3-btn w3-red" id="cancel">Cancel</button>
+    </center>
+</body>
+
+</html>

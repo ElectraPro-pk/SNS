@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/ico" href="images/sns2.png" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title >Friend List Manager</title>
+    <link href="flmS/style.css" rel="stylesheet">
+    <link href="taskbar/scheme.css" rel="stylesheet">
+    <script src="scripts/AUTH.js"></script>
+    <script src="scripts/solid-file-client.js"></script>
+    <script src="scripts/solid-query-ldflex.bundle.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/control.js"></script>
+    <script src="scripts/flm.js"></script>
+    <style>
+        #webd{
+            display: none;
+        }
+        body{
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+            background: rgba(0,130,150,0.2);
+        }
+        #lg{
+            width:40px;
+            height:40px;
+            transform: translateY(-10%);
+            animation: 9s rotate infinite linear;
+            overflow: hidden;
+        }
+        @keyframes rotate{
+            from{
+                transform: rotateZ(0deg);
+            }
+            to{
+                transform: rotateZ(359deg);
+            }
+        }
+        .searchOptions{
+            width:100%;
+            display: inline-flex;
+            color:#142170;
+
+        }
+        .upper{
+            height: 70px;
+            background: #142170;
+            color:white;
+
+        }
+        table tr td button{
+            border:2px solid orange;
+            color:orange;
+            background: #ffffff;
+            padding:5px;
+            transition: all 0.1s ease-in-out;
+        }
+        table tr td button:hover{
+            color:white;
+            padding:6px;
+            background: orange;
+            border:2px solid #ffffff;
+        }
+    </style>
+   
+</head>
+
+<body onload="loadCategorized()">
+    
+    <p id="webd"></p>
+    <script>
+        solid.auth.trackSession(session => {if(!session)window.location.href="../index.html";});
+       solid.auth.trackSession(session => {
+        $('#webd').text(session.webId);
+      
+    });
+    </script>
+    <nav class="w3-container navbar">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img id="logo" src="images/sns1.png">
+            <input class="w3-input" placeholder= "friend's username or web ID"id="search" onchange="" type="text">
+            <img class="cont" id="nf" src="ICONS/newsfeed.png">
+            <img class="cont" id="ch" src="ICONS/chat.png">
+            <img class="cont" id="fl" src="ICONS/friends.png">
+            <img class="cont" id="pr" src="ICONS/contact.png">
+            <img class="cont" id="st" src="ICONS/setting.png">
+            <img class="cont" id="hp" src="ICONS/help.png">
+            <img class="cont" id="lo" src="ICONS/logout.png">
+        
+    </nav>
+    <br><br><br><br>
+    <div class="w3-container">
+        <br>
+<button style="float:right" onclick="window.location.href='flm.html'"  class="w3-btn w3-blue">All Friend</button> 
+<br><br>
+<table class="Family w3-table w3-table-all" id="family">
+    <tr><th colspan="2"><center style="color:orange;">Family Profiles</center></th></tr>
+<tr><th>Profile</th><th>Action</th></tr>
+</table><br><br>
+        <table class="close w3-table w3-table-all" id="close">
+            <tr><th colspan="2"><center style="color:orange;">Close Fiends</center></th></tr>
+        <tr><th>Profile</th><th>Action</th></tr>
+        </table>
+        <br><br>
+        <table class="work w3-table w3-table-all" id="work">
+            <tr><th colspan="2"><center style="color:orange;">Work Profiles</center></th></tr>
+        <tr><th>Profile</th><th>Action</th></tr>
+        </table>
+                <br><br>
+        <table class="Restricted w3-table w3-table-all" id="restricted">
+            <tr><th colspan="2"><center style="color:orange;">Restricted Profiles</center></th></tr>
+        <tr><th>Profile</th><th>Action</th></tr>
+        </table>
+        <br><br>
+    </div>
+</body>
+
+</html>

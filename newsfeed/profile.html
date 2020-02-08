@@ -1,0 +1,167 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/ico" href="images/sns2.png" />
+    <title >SNS</title>
+    <link href="w3.css" rel="stylesheet">
+    <link href="taskbar/taskbars.css" rel="stylesheet">
+    <script src="scripts/AUTH.js"></script>
+    <script src="scripts/solid-file-client.js"></script>
+    <script src="scripts/solid-query-ldflex.bundle.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/profile.js"></script>
+    <script src="scripts/control.js"></script>
+    
+    <script>
+        solid.auth.trackSession(session => {if(!session)window.location.href="../index.html";});
+       solid.auth.trackSession(session => {
+        $('#webd').text(session.webId);
+      
+    });
+    </script>
+<style>
+  body {
+  padding:0;
+  margin:0;
+  
+}
+#username{
+  color:blue;
+  margin-right:20%;
+  font-size:22px;
+}
+#friendlist{
+  list-style-type: none;
+  font-size:18px;
+  color:rgba(1,1,1,0.5);
+  line-height: 30px;
+}
+.main{
+  
+transform: translateY(+15%);
+  width:70%;
+  padding:20px;
+  margin:20px;
+  display:inline-flex;
+  align-items:center;
+} 
+
+#boxshadow {
+  position: relative;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  padding: 10px;
+  background: white;
+}
+
+#boxshadow img {
+  width: auto;
+  height:160px;
+  border: 1px solid #8a4419;
+  border-style: inset;
+}
+#dpSelect{
+ transform: translateX(+180%);
+}
+
+#boxshadow::after {
+  content: '';
+  position: absolute;
+  z-index: -1; /* hide shadow behind image */
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3); 
+  width: 70%; 
+  left: 15%; /* one half of the remaining 30% */
+  height: 100px;
+  bottom: 0;
+}
+*{
+  user-select: none;
+  outline:none;
+}
+#prog{
+  color:red;
+  font-weight: bolder;
+  font-style: italic;
+}
+#loader{
+  width:60px;
+  height:60px;
+}
+#pp{
+  margin-left:25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+</style>
+</head>
+<body onload="loadProfile()" id="bd"  oncontextmenu="return false;">
+  <p id="webd"></p>
+  <nav class="w3-container navbar">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <img id="logo" src="images/sns1.png">
+      <input class="w3-input" placeholder= "friend's username or web ID"id="search"  type="text">
+      <img class="cont" id="nf" src="ICONS/newsfeed.png">
+      <img class="cont" id="ch" src="ICONS/chat.png">
+      <img class="cont" id="fl" src="ICONS/friends.png">
+      <img class="cont" id="pr" src="ICONS/contact.png">
+      <img class="cont" id="st" src="ICONS/setting.png">
+      <img class="cont" id="hp" src="ICONS/help.png">
+      <img class="cont" id="lo" src="ICONS/logout.png">
+    
+  </nav>
+  <div class='w3-container main'>
+    <span class="w3-conatiner" id="username">
+      ${session.webId having username}
+    </span>
+    <div id="boxshadow">
+    <img id="dp" src="../loader.gif" alt="displayPic">
+  </div>
+  <br>
+  </div>
+  <br>
+  <button class="w3-btn" id="pp" onclick="changePrivacy()">***</button>
+  <input type="file" id="dpSelect" placeholder="SELECT PROFILE PIC">
+  <div class="w3-container detail">
+      <label>
+        Username
+        <input type="text" disabled  class="field w3-transparent w3-input" placeholder="username here" id="usernameI">
+      </label>
+        <label>
+        Address
+        <input type="text" disabled class="field w3-transparent w3-input" placeholder="address" id="address">
+      </label>
+        <label>
+        Region
+        <input type="text" disabled class="field w3-transparent w3-input" placeholder="region" id="region" >
+      </label>
+      <label>
+          Country
+          <input type="text" disabled class="field w3-transparent w3-input" placeholder="country" id="country" >
+        </label>
+        <br>
+        <div id="ctrl">
+          <button id="ep" class="w3-btn w3-blue w3-round" >Edit Profile</button>
+          <button id="chg" class="w3-btn w3-blue w3-round" >Save Changes</button>
+          <span id="prog">
+            <img src="../loader.gif" id="loader">
+            Saving Changes .....             
+          </span>
+        </div>
+      
+
+      <div class="w3-container friends">
+        <h3>You knows</h3> 
+        <ul id="friendlist">
+          
+        </ul>
+      </div>
+      
+      
+    </div>
+  
+</body>
+
+</html>
