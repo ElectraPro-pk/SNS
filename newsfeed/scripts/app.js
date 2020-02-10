@@ -27,37 +27,47 @@ const fc = SolidFileClient;
 const { AclParser, AclDoc, AclRule, Permissions, Agents } = SolidAclParser;
 const { READ, WRITE, CONTROL } = Permissions;
 
+function getFileName(fileUrl){
+    return fileUrl.substr(53,fileUrl.length);
+}
 async function createACL(ACCESSTO,ONWER_WEBID, public_flag = false) {
     aclUrl = ACCESSTO + ".acl";
-    console.log(`ONWER  : ${ONWER_WEBID}`);
-    console.log(`PUBLIC : ${public_flag}`);
-    console.log(`FILE   : ${ACCESSTO}`);
     let content = `
-    @prefix  acl:  <http://www.w3.org/ns/auth/acl#>.
+    @prefix : <#>.
+    @prefix acl: <http://www.w3.org/ns/auth/acl#>.
+    @prefix c: </profile/card#>.
     @prefix foaf: <http://xmlns.com/foaf/0.1/>.
-    <ControlReadWrite>
-        a             acl:Authorization;
-        acl:agent     <${ONWER_WEBID}>;
-        acl:accessTo  <${ACCESSTO}>;
-        acl:mode      acl:Read, acl:Write, acl:Control.`
     
+    :ControlReadWrite
+        a acl:Authorization;
+        acl:accessTo <${ACCESSTO}>;
+        acl:agent <${ONWER_WEBID}>;
+        acl:mode acl:Control, acl:Read, acl:Write.
+        `
     if(public_flag){
-            content += `
-            <read>
-            a               acl:Authorization;
-            acl:accessTo    <${ACCESSTO}>;
-            acl:mode       acl:Read;
-            acl:agent      foaf:Agent.`
-        }
+         content += `:Read
+         a acl:Authorization;
+         acl:accessTo <${ACCESSTO}>;
+         acl:agentClass foaf:Agent;
+         acl:mode acl:Read.
+    
+         <#Read-0> a acl:Authorization;
+         acl:agent foaf:Agent;
+        acl:accessTo <${ACCESSTO}>;
+        acl:mode acl:Read.
+     `; 
+      }  
+
     
     fc.updateFile(aclUrl,content,"text/turtle").then(success => {
+        console.log(content);
         alert(`POSTED`);
         window.location.reload();
     }, err => console.log(err));
 }
 function controlCheckBox(t,URL, agent_type,perm_type){
 
-        if(t.checked){
+      if(t.checked){
           addPermission(URL, agent_type,perm_type);
         }
         else{
@@ -77,7 +87,7 @@ async function addPermission(FILE_URL, agent_type,perm_type){
     const newTurtle = await parser.aclDocToTurtle(doc);
     //console.log(newTurtle);
     fc.updateFile(ACL,newTurtle,"text/turtle").then(success => {
-        //console.log(`ADDED PERMISSIONS ${ACL}.`)
+            document.getElementById('id01').style.display='none';
     }, err => console.log(err));
 
 }async function deletePermission(FILE_URL, agent_type,perm_type){
@@ -93,7 +103,7 @@ async function addPermission(FILE_URL, agent_type,perm_type){
     const newTurtle = await parser.aclDocToTurtle(doc);
     //console.log(newTurtle);
     fc.updateFile(ACL,newTurtle,"text/turtle").then(success => {
-        //console.log(`REMOVED PERMISSIONS ${ACL}.`)
+            document.getElementById('id01').style.display='none';
     }, err => console.log(err));
 
 }
@@ -122,9 +132,9 @@ async function getAcl(URL) {
     const public = "http://xmlns.com/foaf/0.1/Agent";
     var ownerPerm = doc.getPermissionsFor($('#webd').text());
     var ONWP  = [...ownerPerm];
-    console.log(ONWP);
     var other = doc.getPermissionsFor(public);
     var OP  = [...other];
+    console.log([...OP])
     $('#O').text($("#webd").text());  
     $('#sh').append(`<p><input class="w3-input" id="cpy" value ="${URL}"><button  class="w3-btn w3-right w3-border w3-green" onclick="copylink()">Copy Link</button></p>`)
     $('#furl').text(`${URL}`)
@@ -507,7 +517,7 @@ async function createPost() {
            
         }
         //setTimeout(function(){
-            createACL(url,profile,true);
+           createACL(url,profile,true);
           
 //        },500);          
 }

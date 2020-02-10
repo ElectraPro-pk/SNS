@@ -26,7 +26,7 @@ var xobj = new XMLHttpRequest()
     };
     xobj.send(null);  
     var paths = JSON.parse(localStorage.getItem('paths'));
-var APP_FOLDER  = "public/SNS/";
+var APP_FOLDER  = "private/SNS/";
 var username;
 solid.auth.trackSession(session => {
   const loggedIn = !!session;
