@@ -110,7 +110,6 @@ function getUsername(profileURL) {
   var index = profileURL.indexOf("profile");
   var substring = profileURL.substr(0, index);
   return substring;
-<<<<<<< HEAD
 }
 
 }
