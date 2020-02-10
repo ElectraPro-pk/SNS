@@ -128,8 +128,12 @@ body{
 	max-width: 450px;
 	padding: 15px;
 	border-radius: 15px;
+<<<<<<< HEAD
 	color:white;
 	background: rgba(40,40,40,0.9);
+=======
+	background: var(--left-msg-bg);
+>>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
   }
   .msg-info {
 	display: flex;

@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
   "uploads": "private/SNS/UPLOADS/",
   "posts": "private/SNS/POSTS/",
   "profile": "private/SNS/profile.ttl"
+=======
+  "uploads": "public/SNS/UPLOADS/",
+  "posts": "public/SNS/POSTS/",
+  "profile": "public/SNS/profile.ttl"
+>>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
   }

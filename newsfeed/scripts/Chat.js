@@ -6,7 +6,18 @@ function chat(t){
    friend_name = friendsData[friend_id].name;
 $('#friendUN').text(friend_name);
 friend = getname(friend_id);
+<<<<<<< HEAD
 }
+=======
+
+}
+/*
+var paths = {
+    "uploads": "private/ZB/UPLOADS/",
+    "posts": "private/ZB/POSTS/",
+    "profile": "private/ZB/profile.ttl",
+};*/
+>>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
 paths = JSON.parse(localStorage.getItem('paths'));
 function getUsername(profileURL) {
     var index = profileURL.indexOf("profile");
@@ -21,7 +32,11 @@ async function setName(){
         var refer = "http://xmlns.com/foaf/0.1/name";   
         a = await doc[refer];
         n =  await a.toString();
+<<<<<<< HEAD
         $('#'+getname(allFriends[i])).text(n.toUpperCase());  
+=======
+        $('#'+getname(allFriends[i])).text(n);  
+>>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
         friendsData[allFriends[i]] = {
             "name":n,
             "webId":allFriends[i]
@@ -49,8 +64,11 @@ async function loadAll(){
                             $('#friends').append(`<a href="#" onclick="chat(this)" class="${m[i]['object'].value}"><span id="${getname(m[i]['object'].value)}"></span><br><span class="small">${m[i]['object'].value}</span></a><hr>`);
                           }
                     }
+<<<<<<< HEAD
                     
                 
+=======
+>>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
 }).then(function(){
     setName().then(function(){
         $('#spinner').fadeOut(500);
