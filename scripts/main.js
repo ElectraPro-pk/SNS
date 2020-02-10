@@ -1,11 +1,10 @@
 var fileClient = SolidFileClient;
 
 const popupUri= 'popup.html';
-<<<<<<< HEAD
+
 $('#login  button').click(() => solid.auth.popupLogin({ popupUri }) );
-=======
 $('#login  button').click(() => solid.auth.popupLogin({popupUri}) );
->>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
+
 /*$('#login button').click(() => {
 fileClient.popupLogin().then( webId => {
    console.log( `Logged in as ${webId}.`)
@@ -30,11 +29,9 @@ var xobj = new XMLHttpRequest()
     };
     xobj.send(null);  
     var paths = JSON.parse(localStorage.getItem('paths'));
-<<<<<<< HEAD
 var APP_FOLDER  = "private/SNS/";
-=======
+
 var APP_FOLDER  = "public/SNS/";
->>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
 var username;
 solid.auth.trackSession(session => {
   const loggedIn = !!session;
@@ -115,6 +112,6 @@ function getUsername(profileURL) {
   return substring;
 <<<<<<< HEAD
 }
-=======
+
 }
->>>>>>> 0c90350cdc308389f906af0005ce2dc5a856166e
+
