@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Search Result | SNS</title>
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="icon" type="image/ico" href="sns2.png" />
+  <link rel="stylesheet" href="styles/scrollbar.css">
+  <script src="scripts/libraries/solid-auth-client.bundle.js"></script>
+  <script src="scripts/libraries/solid-file-client.js"></script>
+  <script src="scripts/libraries/solid-query-ldflex.bundle.js"></script>
+  <script src="scripts/libraries/jquery.js"></script>
+  <script src="scripts/custom/searched.js"></script>
+  <script src="scripts/custom/control.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  
+  <style>
+    #navbar,#side{
+      transition: all 0.15s ease-in-out;
+    }
+    .action-btn:hover{
+      transform: scale(1.3);
+    }
+    #navbar a{
+      transition: all 0.09s ease-in-out;
+    }
+    #navbar a:hover{
+      transform: scale(1.2);
+    }
+  </style>
+<script>
+    window.onscroll = function() {scrollFunction()};
+function scrollFunction() { 
+  var val= document.body.scrollTop  || document.documentElement.scrollTop;
+  document.getElementById("navbar").style.transform = "translateY("+val+"px)";
+ 
+}
+    </script>
+</head>
+<body onload="loadProfile()">
+    <!---NAVBAR STARTS HERE---->
+  <p style="display: none;" id="webd"></p>
+  <div id="toast"></div>
+  <div class="w3-container w3-padding">
+  <div class="w3-padding w3-round w3-bar w3-blue w3-center" id="navbar">
+      <img src="sns1.png" style="width:3%">
+      <input id="search" class="w3-btn w3-white w3-round-xxlarge" placeholder="Friends Web Id" style="width: 30%;" type="text">
+      <a  id="nf" class="w3-round w3-btn">
+        <i class="fa fa-rss">
+        </i>
+      </a>
+      <a  id="fl" class="w3-round w3-btn">
+        <i class="fa fa-users">
+        </i>
+      </a>
+      <a  id="ch" class="w3-round w3-btn">
+        <i class="fa fa-comment">
+        </i>
+      </a>
+      <a  id="pr" class="w3-round w3-btn">
+        <i class="fa fa-user-circle">
+        </i>
+      </a>
+      <a id="st"  class="w3-round w3-btn">
+        <i class="fa fa-cog">
+        </i>
+      </a>
+      <a  id="hp" class="w3-round w3-btn">
+        <i class="fa fa-info-circle">
+        </i>
+      </a>
+      <a  id="fb" class="w3-round w3-btn">
+        <i class="fa fa-question-circle">
+        </i>
+      </a>
+      <a  id="lo" class="w3-round w3-btn">
+        <i class="fa fa-share">
+        </i>
+        </a>
+    </div>
+    <div>
+
+      <!---NAV BAR END HERE---->    
+      
+      <!---FRIENDS STARTS HERE---->
+      <div id="profile-searched">
+      <!---FRIENDS END HERE---->
+      <div class="w3-padding  w3-container  w3-margin">
+        <div class="w3-center w3-container">
+          
+          <img id="dp" src="images/loader-blue.gif"  onerror="this.src='images/user.png'" class="w3-white w3-card-4 w3-border w3-circle" style="width:20%;">
+          <h1 class="w3-padding" id="user-name" style="color:rgba(40,40,40,0.5)"></h1>
+            <h3 id="searched_id" class="w3-large w3-padding" style="color:rgba(40,40,40,0.5);border-top: 2px solid #2196F3;border-bottom:  2px solid #2196F3;"></h3>  
+          </div>
+      </div>
+      <center>
+        <div class="w3-right">
+        <a class="w3-btn w3-card-4 w3-green" id="add" onclick="addFriend()" >Add Friend</a>
+        <a class="w3-btn w3-card-4 w3-red" id="alF" onclick="remFriend()" >Remove Friend</a>
+      </div>
+      <div style="width: 40%;" class="w3-container w3-border">
+        <form class="w3-container w3-padding">
+          <h1 class="w3-blue w3-margin  w3-padding">
+          <i class="fa fa-user-circle"></i>
+            About
+          </h1>
+          <label class="w3-large w3-left" style="color:#2196F3">Name</label>    
+          <input type="text" placeholder="user's name" id="username" class="w3-input w3-transparent" disabled>
+          <label class="w3-large w3-left" style="color:#2196F3">Address</label>    
+          <input type="text" placeholder="user's address" id="address" class="w3-input w3-transparent" disabled>
+          <label class="w3-large w3-left" style="color:#2196F3">City</label>    
+          <input type="text" placeholder="user's city" id="region" class="w3-input w3-transparent" disabled>
+          <label class="w3-large w3-left" style="color:#2196F3">Country</label>    
+          <input type="text" placeholder="user's country" id="country" class="w3-input w3-transparent" disabled>
+         
+        </form>
+      
+      </div>
+    </center>
+    <br>
+    <div class="w3-cell-row">
+    <div class="w3-cell w3-container " style="width:45%">
+      <h3  class="w3-bar-block w3-blue w3-padding"><b>Friends</b>
+      <span class="w3-badge w3-light-blue w3-right" id="friends-count">0</span>
+      </h3>
+     <div id="friends">
+      
+    </div>
+    </div>
+    
+  </div>
+</div>
+</body>
+</html>

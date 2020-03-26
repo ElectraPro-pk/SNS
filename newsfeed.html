@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Feed | SNS</title>
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="icon" type="image/ico" href="sns2.png" />
+  <link rel="stylesheet" href="styles/scrollbar.css">
+  <link rel="stylesheet" href="styles/modal.css">
+  <script src="scripts/libraries/jquery.js"></script>
+  <script src="scripts/libraries/solid-auth-client.bundle.js"></script>
+  <script src="scripts/libraries/solid-file-client.js"></script>
+  <script src="scripts/libraries/solid-query-ldflex.bundle.js"></script>
+  <script src ="scripts/libraries/solid-acl-parser.bundle.js"></script>
+  <script src="scripts/libraries/jquery.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <script src="scripts/custom/control.js"></script>
+  <script src="scripts/custom/modal.js"></script>
+  <script src="scripts/custom/app.js"></script>
+
+  <style>
+    #bg-image{
+      position: absolute;
+      z-index: -10;
+      filter: opacity(.08);
+      width:100%;
+
+    }
+    #files::-webkit-file-upload-button{
+     border:none;
+     outline: none;
+     border-radius: 20px;
+     padding:5px;
+     transition: all 0.1s ease-in;
+     background:#2196F3;
+     color :#fff
+    }
+    
+    #files::-webkit-file-upload-button:hover{
+     padding:10px;
+    }
+    #navbar,#side{
+      
+      transition: all 0.25s ease-in-out;
+    }
+    #navbar a{
+      transition: all 0.09s ease-in-out;
+    }
+    #navbar a:hover{
+      transform: scale(1.1);
+    }
+  </style>
+<script>
+   
+    window.onscroll = function() {scrollFunction()};
+    MicroModal.init({
+  onShow: modal => console.log(`${modal.id} is shown`), 
+  onClose: modal => console.log(`${modal.id} is hidden`),
+  openTrigger: 'data-custom-open', 
+  closeTrigger: 'data-custom-close',
+  disableScroll: true,
+  disableFocus: false,
+  awaitOpenAnimation: false,
+  awaitCloseAnimation: false,
+  debugMode: true
+});
+
+function scrollFunction() { 
+  var val= document.body.scrollTop  || document.documentElement.scrollTop;
+  document.getElementById("navbar").style.transform = "translateY("+val+"px)";
+ 
+}
+    </script>
+</head>
+
+<body onload="start()" >
+
+  <img src="sns2.png" id="bg-image">
+  <p id="webd" style="display:none" >ABC</p>
+
+  <!---NAVBAR STARTS HERE---->
+  <div class="w3-container w3-padding">
+  <div class="w3-padding w3-round w3-bar w3-blue w3-center" id="navbar">
+      <img src="sns1.png" style="width:3%">
+      <input id="search" class="w3-btn w3-white w3-round-xxlarge" placeholder="Friends Web Id" style="width: 30%;" type="text">
+      <a  id="nf" class="w3-round w3-btn">
+        <i class="fa fa-rss">
+        </i>
+      </a>
+      <a  id="fl" class="w3-round w3-btn">
+        <i class="fa fa-users">
+        </i>
+      </a>
+      <a  id="ch" class="w3-round w3-btn">
+        <i class="fa fa-comment">
+        </i>
+      </a>
+      <a  id="pr" class="w3-round w3-btn">
+        <i class="fa fa-user-circle">
+        </i>
+      </a>
+      <a id="st"  class="w3-round w3-btn">
+        <i class="fa fa-cog">
+        </i>
+      </a>
+      <a  id="hp" class="w3-round w3-btn">
+        <i class="fa fa-info-circle">
+        </i>
+      </a>
+      <a  id="fb" class="w3-round w3-btn">
+        <i class="fa fa-question-circle">
+        </i>
+      </a>
+      <a  id="lo" class="w3-round w3-btn">
+        <i class="fa fa-share">
+        </i>
+        </a>
+    </div>
+    
+    <div>
+      <!---NAV BAR END HERE---->    
+      <div id="toast"></div>
+      <!--Friend POST START-->
+      
+      <!-- FRIEND POST  END-->
+      <!---POSTS STARTS HERE---->
+      <div class="w3-container w3-padding w3-margin">
+        <h2>News Feed</h2>
+        <hr style="border:1.2px solid rgba(40,40,40,0.6)">
+      </div>
+    
+    
+      <center>
+        <div class="w3-margin w3-padding w3-container" style="width:45%">
+          <div class="w3-card w3-round ">
+            <h3 class="w3-blue w3-padding">Make Post</h3>
+            <textarea class="w3-transparent w3-large w3-padding w3-input" id="postbox" style="resize: none;" placeholder="whats on your mind"></textarea>
+            <input type="file" id="files" class="w3-input w3-animate-input w3-card-4 w3-padding">
+            <p id="loader" style="display: none;" class="w3-margin w3-padding"><img src="images/loader-blue.gif" style="width:20px">&nbsp;&nbsp;Uploading your Post...</p>
+            <a onclick="createPost()" id="buttonpost" class="w3-btn w3-blue w3-padding" style="width: 100%;">Share</a>
+          </div>
+      </div>
+      
+      <h3 class="w3-card-4 w3-blue 3-padding w3-container w3-round-large w3-center">Shared with you</h3>
+    <div id="friend-posts" style="width:40%;">
+     
+    </div>
+
+      <h3 class="w3-card-4 w3-teal 3-padding w3-container w3-round-large w3-center">Your Shares</h3>
+    <div id="posts" style="width:40%;">
+     
+    </div>
+  </center>
+    <!---POSTS END HERE---->
+      <!---MODAL START HERE-->
+      <div class="modal micromodal-slide" id="modal" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+          <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <header class="modal__header">
+              <h2 class="modal__title" id="modal-title">
+                ACL Settings
+              </h2>
+           
+            </header>
+            <main class="modal__content" id="modal-content" style="height: 350px; max-height: 380px;overflow-y: auto;">
+              <p id="furl" class=" w3-card-4 w3-round w3-deep-orange w3-padding w3-large"> </p>
+              <p style="display:none" id="url"></p>
+              <div id="owner" class="w3-padding w3-cell-row ">
+                <h3>Sharing Permission</h3>
+                <table class="w3-padding  w3-large w3-table w3-bordered">
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5"> Read</td>
+                    <td colspan="5">
+                      <input class="w3-input w3-check w3-animate-input" onchange="controlCheckBox(this,public,READ)" id="rd" type="checkbox">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="5">Write</td>
+                    <td colspan="5"> <input class="w3-input w3-check w3-animate-input" onchange="controlCheckBox(this,public,WRITE)" id="wr" type="checkbox"> </td>
+                  </tr>
+                  <tr>
+                    <td colspan="5">Control</td>
+                    <td colspan="5"> <input class="w3-animate-input w3-input w3-check" onchange="controlCheckBox(this,public,CONTROL)" id="cnt" type="checkbox"> </td>
+                  </tr>
+                </table>
+                
+                <div  class="w3-padding w3-cell w3-animate-input" >
+                  <h5 class=" w3-card-4 w3-large w3-padding  w3-center w3-round w3-deep-orange" >Sharing With Specific Id</h5>
+                  <input type="text" placeholder="friends webId" class=" w3-input  w3-animate-input"> 
+                  <button class="w3-btn w3-deep-orange w3-card-4 w3-round-large w3-margin w3-right w3-padding">Share</button>
+                </div>
+              </div>
+            </main>
+            <footer class="modal__footer">
+              <!button class="modal__btn w3-margin w3-blue w3-right" data-micromodal-close aria-label="Save the Changes">
+              <button class="modal__btn w3-margin w3-red w3-right" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+            </footer>
+          </div>
+        </div>
+      </div>
+    
+      <!---MODAL END HERE-->
+  <script>
+    $(document).ready(function(){
+      $('.option').on('click',()=>{   
+        MicroModal.show('modal');
+      });
+  });
+      </script>
+</body>
+</html>

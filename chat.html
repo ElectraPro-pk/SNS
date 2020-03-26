@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chat | SNS</title>
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="icon" type="image/ico" href="sns2.png" />
+  <link rel="stylesheet" href="styles/scrollbar.css">
+  <script src="scripts/libraries/solid-auth-client.bundle.js"></script>
+  <script src="scripts/libraries/solid-file-client.js"></script>
+  <script src="scripts/libraries/solid-query-ldflex.bundle.js"></script>
+  <script src="scripts/libraries/jquery.js"></script>
+  <script src="scripts/custom/control.js"></script>
+  <script src="scripts/custom/chat.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <style>
+    #navbar,#side{
+      
+      transition: all 0.25s ease-in-out;
+    }
+    #navbar a{
+      transition: all 0.09s ease-in-out;
+    }
+    #navbar a:hover{
+      transform: scale(1.1);
+    }
+
+  </style>
+<script>
+    window.onscroll = function() {scrollFunction()};
+function scrollFunction() { 
+  var val= document.body.scrollTop  || document.documentElement.scrollTop;
+  document.getElementById("navbar").style.transform = "translateY("+val+"px)"; 
+ 
+}
+    </script>
+</head>
+
+<body onload="loadAll()">
+  <!---NAVBAR STARTS HERE---->
+  <p id="webd" style="display: none;"></p>
+<div id="toast"></div>
+  <div class="w3-container w3-padding">
+  <div class="w3-padding w3-round w3-bar w3-blue w3-center" id="navbar">
+      <img src="sns1.png" style="width:3%">
+      <input id="search" class="w3-btn w3-white w3-round-xxlarge" placeholder="Friends Web Id" style="width: 30%;" type="text">
+      <a  id="nf" class="w3-round w3-btn">
+        <i class="fa fa-rss">
+        </i>
+      </a>
+      <a  id="fl" class="w3-round w3-btn">
+        <i class="fa fa-users">
+        </i>
+      </a>
+      <a  id="ch" class="w3-round w3-btn">
+        <i class="fa fa-comment">
+        </i>
+      </a>
+      <a  id="pr" class="w3-round w3-btn">
+        <i class="fa fa-user-circle">
+        </i>
+      </a>
+      <a id="st"  class="w3-round w3-btn">
+        <i class="fa fa-cog">
+        </i>
+      </a>
+      <a  id="hp" class="w3-round w3-btn">
+        <i class="fa fa-info-circle">
+        </i>
+      </a>
+      <a  id="fb" class="w3-round w3-btn">
+        <i class="fa fa-question-circle">
+        </i>
+      </a>
+      <a  id="lo" class="w3-round w3-btn">
+        <i class="fa fa-share">
+        </i>
+        </a>
+    </div>
+    
+    <div>
+      <!---NAV BAR END HERE---->    
+     
+      <div class="w3-container w3-cell-row w3-padding">
+        <div class="w3-white w3-left w3-cell" style="width: 35%;">
+            <h3 class="w3-blue w3-padding">Friends
+            <a class="w3-small  w3-teal w3-badge w3-right" id="friend_count" style="transition:all 0.5s ease-in ;"></a>
+            </h3>
+            <ul class="w3-ul w3-round-large" id="friends" style="height: 100%;max-height:450px;overflow-y: auto;">
+                          
+            </ul>
+        </div>
+        <div class="w3-cell w3-white w3-right" style="width: 65%;">
+            <h3 class="w3-blue-grey w3-padding">CHAT WINDOW</h3>
+            <div class="w3-container">
+
+            </div>
+        </div>
+      </div>
+</body>
+</html>

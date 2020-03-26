@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Friends | SNS</title>
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="icon" type="image/ico" href="sns2.png" />
+  <link rel="stylesheet" href="styles/scrollbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="styles/materlize.css">
+  <link rel="stylesheet" href="styles/modal.css">
+  
+
+  <script src="scripts/libraries/solid-auth-client.bundle.js"></script>
+  <script src="scripts/libraries/solid-file-client.js"></script>
+  <script src="scripts/libraries/solid-query-ldflex.bundle.js"></script>
+  <script src="scripts/libraries/jquery.js"></script>
+  <script src="scripts/libraries/materialize.js"></script>
+  <script src="scripts/custom/modal.js"></script>
+  <script src="scripts/custom/control.js"></script>
+  <script src="scripts/custom/flm.js"></script>
+  <style>
+    #navbar,#side{
+      
+      transition: all 0.15s ease-in-out;
+    }
+    #navbar a{
+      transition: all 0.09s ease-in-out;
+    }
+    #navbar a:hover{
+      transform: scale(1.2);
+    }
+    .action-btn{
+      width:80%;
+      transition: all 0.1s ease-in-out;
+    }
+    .action-btn:hover{
+      margin: 5px;
+      padding:5px;
+      transform: scale(1.2);
+    }
+   
+  </style>
+
+<script>
+    window.onscroll = function() {scrollFunction()};
+    MicroModal.init({
+  onShow: modal => console.log(`${modal.id} is shown`), 
+  onClose: modal => console.log(`${modal.id} is hidden`),
+  openTrigger: 'data-custom-open', 
+  closeTrigger: 'data-custom-close',
+  disableScroll: true,
+  disableFocus: false,
+  awaitOpenAnimation: false,
+  awaitCloseAnimation: false,
+  debugMode: true
+});
+
+function scrollFunction() { 
+  var val= document.body.scrollTop  || document.documentElement.scrollTop;
+  console.log(document.getElementById("navbar").style.transform = "translateY("+val+"px)"); 
+ // console.log(document.getElementById("side").style.transform = "translateY("+val+"px)"); 
+}
+    </script>
+</head>
+<body onload="loadAll()">
+
+  <p style="display: none;" id="webd"></p>
+  <div id="toast"></div>
+    <!---NAVBAR STARTS HERE---->
+
+  <div class="w3-container w3-padding">
+  <div class="w3-padding w3-round w3-bar w3-blue w3-center" id="navbar">
+      <img src="sns1.png" style="width:3%">
+      <input id="search" class="w3-btn w3-white w3-round-xxlarge" placeholder="Friends Web Id" style="width: 30%;" type="text">
+      <a  id="nf" class="w3-round w3-btn">
+        <i class="fa fa-rss">
+        </i>
+      </a>
+      <a  id="fl" class="w3-round w3-btn">
+        <i class="fa fa-users">
+        </i>
+      </a>
+      <a  id="ch" class="w3-round w3-btn">
+        <i class="fa fa-comment">
+        </i>
+      </a>
+      <a  id="pr" class="w3-round w3-btn">
+        <i class="fa fa-user-circle">
+        </i>
+      </a>
+      <a id="st"  class="w3-round w3-btn">
+        <i class="fa fa-cog">
+        </i>
+      </a>
+      <a  id="hp" class="w3-round w3-btn">
+        <i class="fa fa-info-circle">
+        </i>
+      </a>
+      <a  id="fb" class="w3-round w3-btn">
+        <i class="fa fa-question-circle">
+        </i>
+      </a>
+      <a  id="lo" class="w3-round w3-btn">
+        <i class="fa fa-share">
+        </i>
+        </a>    
+    </div>
+  <div>
+
+      <!---NAV BAR END HERE---->    
+      
+      <!---FRIENDS STARTS HERE---->
+      
+    </center>
+    
+    <div class="w3-cell-row">
+    <div class="w3-cell w3-container " style="width:45%">
+      <h1 class="w3-blue w3-round w3-padding">Friends </h1>
+      <h6 class="w3-card-4 "><span id="count_friend" class="w3-right w3-badge w3-teal w3-small w3-circle" ></span></h6>
+      <div id="friends" style="max-height: 450px;overflow-y: auto; height: 450px;">
+      
+    </div>
+    </div>
+    <div class="w3-cell w3-container " style="width:45%">
+      <h1 class="w3-teal w3-round w3-padding">Categories</h1>
+      <div  style="max-height: 350px;overflow-y: auto; height: 350px;">
+        <ul id="collapsibl" class="collapsible w3-round-large w3-card-4">
+          <li>
+            <div class="collapsible-header w3-purple w3-large w3-round-large">Close</div>
+            <div  class="collapsible-body"><span id="close">
+              
+            </span>
+          </div>
+          </li>
+          <li>
+            <div class="collapsible-header w3-blue w3-large w3-round-large">Work</div>
+            <div  class="collapsible-body"><span id="work">
+             
+            </span>
+          </div>
+          </li>
+          <li>
+            <div class="collapsible-header w3-brown w3-large w3-round-large">Restricted</div>
+            <div  class="collapsible-body"><span id="restricted">
+             
+            </span>
+          </div>
+          </li>
+          <li>
+            <div class="collapsible-header w3-pink w3-round-large w3-large">Family</div>
+            <div  class="collapsible-body"><span id="family">
+             
+            </span>
+          </div>
+          </li>
+          
+        </ul>
+              
+      </div>
+    </div>
+  </div>
+
+   <!-- MODAL FOR FRIEND CATEGORY -->
+   <div class="modal micromodal-slide" id="modal" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <header class="modal__header">
+          <h2 class="modal__title" id="modal-title">
+            Category Settings
+          </h2>
+       
+        </header>
+        <main class="modal__content" id="modal-content">
+          <p id="webId" class="w3-padding w3-center">
+            
+          </p>
+          <div class="w3-padding w3-cell-row w3-center">
+            <button class="w3-btn w3-card-4 action-btn  w3-padding w3-purple" onclick="cat('Close')">Add to Close Friends</button>
+            <button class="w3-btn w3-card-4 action-btn  w3-padding w3-deep-purple" onclick="cat('Family')">Add to Family Friends</button>
+            <button class="w3-btn w3-card-4 action-btn  w3-padding w3-indigo" onclick="cat('Work')">Add to Work Friends</button>
+            <button class="w3-btn w3-card-4 action-btn  w3-padding w3-blue" onclick="cat('Restricted')">Add to Restricted Friends</button>
+            
+          </div>
+        </main>
+        <footer class="modal__footer">
+          <button class="modal__btn w3-red w3-right" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!---MODAL END HERE-->
+  <script>
+    $(document).ready(function(){
+      $('#collapsibl').collapsible();
+      $('.sett').on('click',()=>{   
+        MicroModal.show('modal');
+      });
+  });
+  </script>
+</body>
+</html>
+ 

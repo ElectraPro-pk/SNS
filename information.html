@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FAQ | SNS</title>
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="icon" type="image/ico" href="sns2.png" />
+  <link rel="stylesheet" href="styles/scrollbar.css">
+  <script src="scripts/libraries/jquery.js"></script>
+  <script src="scripts/custom/control.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <style>
+    #navbar,#side{
+      transition: all 0.25s ease-in-out;
+    }
+    #navbar a{
+      transition: all 0.09s ease-in-out;
+    }
+    #navbar a:hover{
+      transform: scale(1.1);
+    }
+
+  </style>
+<script>
+    window.onscroll = function() {scrollFunction()};
+function scrollFunction() { 
+  var val= document.body.scrollTop  || document.documentElement.scrollTop;
+  console.log(document.getElementById("navbar").style.transform = "translateY("+val+"px)"); 
+ // console.log(document.getElementById("side").style.transform = "translateY("+val+"px)"); 
+}
+    </script>
+</head>
+
+<body>
+  <!---NAVBAR STARTS HERE---->
+
+  <div class="w3-container w3-padding">
+  <div class="w3-padding w3-round w3-bar w3-blue w3-center" id="navbar">
+      <img src="sns1.png" style="width:3%">
+      <input id="search" class="w3-btn w3-white w3-round-xxlarge" placeholder="Friends Web Id" style="width: 30%;" type="text">
+      <a  id="nf" class="w3-round w3-btn">
+        <i class="fa fa-rss">
+        </i>
+      </a>
+      <a  id="fl" class="w3-round w3-btn">
+        <i class="fa fa-users">
+        </i>
+      </a>
+      <a  id="ch" class="w3-round w3-btn">
+        <i class="fa fa-comment">
+        </i>
+      </a>
+      <a  id="pr" class="w3-round w3-btn">
+        <i class="fa fa-user-circle">
+        </i>
+      </a>
+      <a id="st"  class="w3-round w3-btn">
+        <i class="fa fa-cog">
+        </i>
+      </a>
+      <a  id="hp" class="w3-round w3-btn">
+        <i class="fa fa-info-circle">
+        </i>
+      </a>
+      <a  id="fb" class="w3-round w3-btn">
+        <i class="fa fa-question-circle">
+        </i>
+      </a>
+      <a  id="lo" class="w3-round w3-btn">
+        <i class="fa fa-share">
+        </i>
+        </a>
+    </div>
+    
+    <div>
+      <!---NAV BAR END HERE---->    
+      <center>
+        <div style="width: 80%;" class="w3-container w3-border w3-round-large w3-margin">
+            <h1 class="w3-blue w3-small w3-round-large w3-margin  w3-padding">
+            <i class="fa fa-info-circle w3-large"></i>
+              <b style="font-size: 18px;" >FAQ's</b>
+            </h1>
+            <p style="text-align: left;" class="w3-cell-row w3-text-teal w3-large w3-padding ">
+                <span style="font-size: 24px;">Path to Your Storage</span>
+                <a style="text-align: left;" class="w3-cell-row w3-padding w3-large">
+                    <span id="webId"></span>/private/SNS/<br>
+                </a>
+            </p>
+            <p style="text-align: left;" class="w3-cell-row w3-text-teal w3-large w3-padding ">
+                <span style="font-size: 24px;">Authentication Problem</span>
+                <a style="text-align: left;" class="w3-cell-row w3-padding w3-large">
+                    [Read More...]
+                </a>
+            </p>
+        </div>
+      </center>
+      
+</body>
+</html>
